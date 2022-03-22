@@ -16,9 +16,9 @@
           android:id="@+id/ciudadCV"
           android:layout_width="163dp"
           android:layout_height="wrap_content"
-          android:hint="Ciudad"
+          android:hint="City"
           android:padding="10sp"
-          android:text="Ciudad"
+          android:text=""
           android:textSize="30sp"
           android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
           android:layout_height="wrap_content"
           android:hint="Temp F"
           android:padding="10sp"
-          android:text="Tem"
+          android:text=""
           android:textSize="20sp"
           android:textStyle="italic"
           android:layout_gravity="right"

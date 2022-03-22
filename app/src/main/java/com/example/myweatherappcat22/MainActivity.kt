@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myweatherappcat22.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -24,5 +25,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.frag_nav_container)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.frag_nav_container)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
