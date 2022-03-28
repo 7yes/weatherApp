@@ -19,20 +19,22 @@ import com.example.myweatherappcat22.viewmodel.ResultState
 private const val KEY = "KEY"
 
 class ForecastFragment : BaseFragment() {
-    private var city: String? = "Atlanta"
+
+    private var city: String? = null
 
     private val binding by lazy {
         FragmentForecastBinding.inflate(layoutInflater)
     }
 
     private val weatherAdapter by lazy {
-        WeatherAdapter(){  forecast: Forecast ->
-            val bundle = Bundle()
-            bundle.putString("CITY",city)
-            bundle.putString("TEMP", convToFah(forecast.main.temp))
-            bundle.putString("DESC", forecast.weather[0].description)
-
-            findNavController().navigate(R.id.action_ForecastFragment_to_DetailsFragment, bundle)
+        WeatherAdapter {  forecast: Forecast ->
+            Bundle().apply {
+                putString("CITY", city)
+                putString("TEMP", convToFah(forecast.main.temp))
+                putString("DESC", forecast.weather[0].description)
+            }.also {
+                findNavController().navigate(R.id.action_ForecastFragment_to_DetailsFragment, it)
+            }
         }
     }
 
@@ -61,7 +63,10 @@ class ForecastFragment : BaseFragment() {
 
         weatherViewModel.cityForecast.observe(viewLifecycleOwner, ::handleState)
 // call to the API
-        weatherViewModel.getForecast(city!!)
+
+        city?.let {
+            weatherViewModel.getForecast(it)
+        }
 
         return binding.root
     }
